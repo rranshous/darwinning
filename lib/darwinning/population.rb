@@ -23,7 +23,7 @@ module Darwinning
       @history = []
 
       build_population(@population_size)
-      @history << @members
+      #@history << @members
     end
 
     def build_population(population_size)
@@ -59,16 +59,18 @@ module Darwinning
       new_members.pop if new_members.length > members.length
 
       @members = apply_non_pairwise_evolutions(new_members)
-      @history << @members
+      #@history << @members
       @generation += 1
     end
 
     def evolution_over?
       # check if the fitness goal or generation limit has been met
+      current_best_member = best_member
+      puts "BEST: #{current_best_member.fitness}"
       if generations_limit > 0
-        generation == generations_limit || best_member.fitness == fitness_goal
+        generation == generations_limit || current_best_member.fitness == fitness_goal
       else
-        best_member.fitness == fitness_goal
+        currentbest_member.fitness == fitness_goal
       end
     end
 
